@@ -1,0 +1,1 @@
+RewriteRule ^images/([a-zA-Z0-9\/_\-\.]+)$  /file.php?pass=FusRoDah!!&name=$1&type=image  [L]
