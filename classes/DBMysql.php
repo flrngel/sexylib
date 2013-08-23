@@ -1,24 +1,17 @@
 <?
-/**
- * MySQL FUNCTIONAL CLASS
- *
- * @file DBMysql.php
- * @author 
- * @date 
- */
 class DBMysql{
-	var $Database	  = "";
-	var $Host		    = "";
-	var $User		    = "";
-	var $Password   = "";
+	var $Database = "";
+	var $Host = "";
+	var $User = "";
+	var $Password = "";
 
-	var $Link_ID  = 0;
+	var $Link_ID = 0;
 	var $Query_ID = 0;
-	var $Record   = array();
+	var $Record = array();
 	var $Row;
 
-	var $Errno    = 0;
-	var $Error    = "";
+	var $Errno = 0;
+	var $Error = "";
 
 	var $debug_addr = "";
 
@@ -42,7 +35,7 @@ class DBMysql{
 	public function query( $query_str ) {
 		$this->connect();
 		$this->Query_ID = mysqli_query( $this->Link_ID, $query_str );
-		$this->Row   = 0;
+		$this->Row = 0;
 		$this->Errno = mysqli_errno( $this->Link_ID );
 		$this->Error = mysqli_error( $this->Link_ID );
 		if( !$this->Query_ID ) {
@@ -95,8 +88,8 @@ class DBMysql{
 	public function next_fetch_array(){
 		if(!$this->Link_ID) return false;
 		$this->Record = mysqli_fetch_array($this->Query_ID);
-		$this->Errno 	= mysqli_errno( $this->Link_ID );
-		$this->Error 	= mysqli_error( $this->Link_ID );
+		$this->Errno = mysqli_errno( $this->Link_ID );
+		$this->Error = mysqli_error( $this->Link_ID );
 
 		$stat = is_array( $this->Record );
 		if (!$stat) {
@@ -138,7 +131,7 @@ class DBMysql{
 		$this->connect();
 		$this->Query_ID = mysqli_query( $this->Link_ID, $query_str );
 		$this->Record = mysqli_fetch_array($this->Query_ID);
-		$this->Row   = 0;
+		$this->Row = 0;
 		$this->Errno = mysqli_errno( $this->Link_ID );
 		$this->Error = mysqli_error( $this->Link_ID );
 		if( !$this->Query_ID ) {
@@ -156,7 +149,7 @@ class DBMysql{
 		$this->connect();
 		$this->Query_ID = mysqli_query( $this->Link_ID, $query_str );
 		$this->Record = mysqli_fetch_array($this->Query_ID);
-		$this->Row   = 0;
+		$this->Row = 0;
 		$this->Errno = mysqli_errno( $this->Link_ID );
 		$this->Error = mysqli_error( $this->Link_ID );
 		if( !$this->Query_ID ) {
@@ -196,7 +189,7 @@ class DBMysql{
 			$call = $_SERVER['PHP_SELF'];
 			echo "<pre>";
 			echo "<b>DB Error occurred.</b>\n";
-			echo "<b>- msg  : </b>".$msg."\n";
+			echo "<b>- msg : </b>".$msg."\n";
 			echo "<b>- code : </b>".$this->Errno." (".$this->Error.")\n";
 			echo "<b>- call : </b>".$call."\n";
 			echo "</pre>";
