@@ -1,14 +1,13 @@
 <?
-class sexyFile extends sexyModel{
-        var $db;
+class sexyFile extends sexyModel{ // sexyModel for save realnames in DB
         var $dir;
         var $files;
-        var $abspath=""; // path here
-        var $table="files";
+        var $abspath=""; // Absolute path for file storage
+        var $table=""; // Table name for saving file`s realname
         var $table_perm=array("filename","realname");
 
         function __construct($subpath){
-                $this->db=new DB\Mysql;
+                parent::__construct($this->table);
                 $this->files=array();
                 $this->dir=$subpath."/";
         }
@@ -26,16 +25,13 @@ class sexyFile extends sexyModel{
                 $filename=sha1(uniqid());
                 $target=$this->dir.$filename;
                 $filepath=$this->abspath.$target;
-                echo $filepath;
                 if( move_uploaded_file($tmp_name,$filepath) ){
                 }
-                print_r(array("filename"=>$target,"realname"=>$realname));
                 $this->_insert($this->table_perm,array("filename"=>$target,"realname"=>$realname));
                 return $target;
         }
 
         function upload($files){
-                print_r($files);
                 if( is_array($files['tmp_name']) ){
                         $var=array();
                         foreach( $files['tmp_name'] as $key => $val ){
