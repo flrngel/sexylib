@@ -54,7 +54,16 @@ class sexyFile extends sexyModel{ // sexyModel for save realnames in DB
 				$this->files[]=$res;
 			}
 		}
-		return $this->toString();
+		if( sizeof($this->files) ){
+			return (object)array(
+				"result"=>true,
+				"data"=>$this->toString()
+			);
+		}else{
+			return (object)array(
+				"result"=>false
+			);
+		}
 	}
 }
 ?>
