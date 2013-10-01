@@ -12,12 +12,23 @@ class sexyFile extends sexyModel{ // sexyModel for save realnames in DB
 		$this->dir=$subpath."/";
 	}
 
-	private function toString(){
-		return implode("|",$this->files);
+	function toString($array){
+		if( !empty($array) )
+			return implode("|",$array);
+	  else
+			return implode("|",$this->files);
 	}
 
 	function toArray($str){
 		return explode("|",$str);
+	}
+
+	function getFilename($target){
+		$db=new DB\Mysql;
+		$sql="select * from files where filename='$target'";
+		$db->query($sql);
+		$tmp=$db->nfo();
+		return $tmp->realname;
 	}
 
 	function _upload($tmp_name,$realname){
