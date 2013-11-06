@@ -1,5 +1,6 @@
 <?
-class DBMysql{
+namespace DB;
+class Mysql{
 	var $Database = "";
 	var $Host = "";
 	var $User = "";
@@ -41,7 +42,7 @@ class DBMysql{
 		if( !$this->Query_ID ) {
 			$this->halt("SQL Syntax error. (".$query_str.")");
 		}
-		return $this->Query_ID;
+		return $this;
 	}
 
 	public function nfa(){
