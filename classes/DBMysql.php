@@ -45,34 +45,34 @@ class Mysql{
 		return $this;
 	}
 
-	public function nfa(){
+	public function nfa($arr=''){
 		return $this->next_fetch_array();
 	}
 
-	public function nfr(){
+	public function nfr($arr=''){
 		return $this->next_fetch_row();
 	}
 
-	public function nfo(){
+	public function nfo($arr=''){
 		return $this->next_fetch_object();
 	}
 
-	public function fetch_all_rows(){
-		while($tmp=$this->nfr()){
+	public function fetch_all_rows($arr=''){
+		while($tmp=$this->nfr($arr)){
 			$tmp2[]=$tmp;
 		}
 		return $tmp2;
 	}
 
-	public function fetch_all_arrays(){
-		while($tmp=$this->nfa()){
+	public function fetch_all_arrays($arr=''){
+		while($tmp=$this->nfa($arr='')){
 			$tmp2[]=$tmp;
 		}
 		return $tmp2;
 	}
 
 	public function fetch_all_objects(){
-		while($tmp=$this->nfo()){
+		while($tmp=$this->nfo($arr='')){
 			$tmp2[]=$tmp;
 		}
 		return $tmp2;
@@ -86,7 +86,7 @@ class Mysql{
 		}
 		return $tmp;
 	}
-	public function next_fetch_array(){
+	public function next_fetch_array($arr=''){
 		if(!$this->Link_ID) return false;
 		$this->Record = mysqli_fetch_array($this->Query_ID);
 		$this->Errno = mysqli_errno( $this->Link_ID );
@@ -96,6 +96,11 @@ class Mysql{
 		if (!$stat) {
 			mysqli_free_result( $this->Query_ID );
 			$this->Query_ID = 0;
+		}
+		if( is_array($arr) ){
+			foreach( $arr as $key=>$val ){
+				unset($this->Record[$val]);
+			}
 		}
 		return $this->Record;
 	}
@@ -111,6 +116,11 @@ class Mysql{
 			mysqli_free_result($this->Query_ID);
 			$this->Query_ID = 0;
 		}
+		if( is_array($arr) ){
+			foreach( $arr as $key=>$val ){
+				unset($this->Record[$val]);
+			}
+		}
 		return $this->Record;
 	}
 
@@ -124,6 +134,11 @@ class Mysql{
 		if (!$stat) {
 			mysqli_free_result($this->Query_ID);
 			$this->Query_ID = 0;
+		}
+		if( is_array($arr) ){
+			foreach( $arr as $key=>$val ){
+				unset($this->Record->$val);
+			}
 		}
 		return $this->Record;
 	}
