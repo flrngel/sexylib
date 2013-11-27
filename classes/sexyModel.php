@@ -28,7 +28,14 @@ class sexyModel{
 		$VALUES=array();
 		foreach( $PERMISSION as $KEY ){
 			if( !empty($ARRAY[$KEY]) ){
-				$VALUES[]="`$KEY`='".mysql_escape_string($ARRAY[$KEY])."'";
+				$EXP=explode(";",$ARRAY[$KEY]);
+				if( count($EXP) == 2 && strlen($EXP[0]) == 1 ){
+					// this means operator
+					// usage: array('KEY' => "OP;VAL")         OP : +,-, etc..
+					$VALUES[]="`$KEY`$EXP[0]='".mysql_escape_string($EXP[1])."'";
+				}else{
+					$VALUES[]="`$KEY`='".mysql_escape_string($ARRAY[$KEY])."'";
+				}
 			}
 		}
 		$VALUES=implode(",",$VALUES);
