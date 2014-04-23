@@ -46,15 +46,15 @@ class Mysql{
 	}
 
 	public function nfa($arr=''){
-		return $this->next_fetch_array();
+		return $this->next_fetch_array($arr);
 	}
 
 	public function nfr($arr=''){
-		return $this->next_fetch_row();
+		return $this->next_fetch_row($arr);
 	}
 
 	public function nfo($arr=''){
-		return $this->next_fetch_object();
+		return $this->next_fetch_object($arr);
 	}
 
 	public function fetch_all_rows($arr=''){
@@ -71,7 +71,7 @@ class Mysql{
 		return $tmp2;
 	}
 
-	public function fetch_all_objects(){
+	public function fetch_all_objects($arr=''){
 		while($tmp=$this->nfo($arr='')){
 			$tmp2[]=$tmp;
 		}
@@ -105,7 +105,7 @@ class Mysql{
 		return $this->Record;
 	}
 
-	public function next_fetch_row(){
+	public function next_fetch_row($arr=''){
 		if(!$this->Link_ID) return false;
 
 		$this->Record = @mysqli_fetch_row($this->Query_ID, $this->Row++);
@@ -124,7 +124,7 @@ class Mysql{
 		return $this->Record;
 	}
 
-	public function next_fetch_object(){
+	public function next_fetch_object($arr=''){
 		if(!$this->Link_ID) return false;
 
 		$this->Record = @mysqli_fetch_object($this->Query_ID);
