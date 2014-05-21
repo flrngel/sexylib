@@ -12,7 +12,7 @@ class sexyModel{
 		$COLUMNS=array();
 		$VALUES=array();
 		foreach( $PERMISSION as $KEY ){
-			if( !empty($ARRAY[$KEY]) ){
+			if( !empty($ARRAY[$KEY]) || isset($ARRAY[$KEY]) ){
 				$COLUMNS[]="`$KEY`";
 				$VALUES[]="'".mysql_escape_string($ARRAY[$KEY])."'";
 			}
@@ -27,7 +27,7 @@ class sexyModel{
 	function _update($PERMISSION,$ARRAY,$WHERE){
 		$VALUES=array();
 		foreach( $PERMISSION as $KEY ){
-			if( !empty($ARRAY[$KEY]) ){
+			if( !empty($ARRAY[$KEY]) || isset($ARRAY[$KEY]) ){
 				$EXP=explode(";",$ARRAY[$KEY]);
 				if( count($EXP) == 2 && strlen($EXP[0]) == 1 ){
 					// this means operator
