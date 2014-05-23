@@ -43,12 +43,10 @@ class sexyModel{
 		return $this->db->query($QUERY);
 	}
 
-	function _delete($PERMISSION,$ARRAY){
+	function _delete($VALIDATE,$ARRAY){
 		$VALUES=array();
-		foreach( $PERMISSION as $KEY ){
-			if( !empty($ARRAY[$KEY]) ){
-				$VALUES[]="`$KEY`='".mysql_escape_string($ARRAY[$KEY])."'";
-			}
+		foreach( $VALIDATE as $KEY ){
+			$VALUES[]="`$KEY`='".mysql_escape_string($ARRAY[$KEY])."'";
 		}
 		$WHERE=implode(" and ",$VALUES);
 		$QUERY="delete from `$this->TABLE` where 1 and $WHERE";
