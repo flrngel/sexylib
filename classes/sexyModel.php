@@ -19,7 +19,7 @@ class sexyModel{
 		}
 		$COLUMNS=implode(",",$COLUMNS);
 		$VALUES=implode(",",$VALUES);
-		$QUERY="insert into $this->TABLE ($COLUMNS) values($VALUES)";
+		$QUERY="insert into `$this->TABLE` ($COLUMNS) values($VALUES)";
 		$this->db->query($QUERY);
 		return $this->db->insert_id();
 	}
@@ -39,7 +39,19 @@ class sexyModel{
 			}
 		}
 		$VALUES=implode(",",$VALUES);
-		$QUERY="update $this->TABLE SET $VALUES WHERE $WHERE";
+		$QUERY="update `$this->TABLE` SET $VALUES WHERE $WHERE";
+		return $this->db->query($QUERY);
+	}
+
+	function _delete($PERMISSION,$ARRAY){
+		$VALUES=array();
+		foreach( $PERMISSION as $KEY ){
+			if( !empty($ARRAY[$KEY]) ){
+				$VALUES[]="`$KEY`='".mysql_escape_string($ARRAY[$KEY])."'";
+			}
+		}
+		$WHERE=implode(" and ",$VALUES);
+		$QUERY="delete from `$this->TABLE` where 1 and $WHERE";
 		return $this->db->query($QUERY);
 	}
 }
