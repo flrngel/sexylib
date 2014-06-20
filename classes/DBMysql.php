@@ -58,6 +58,7 @@ class Mysql{
 	}
 
 	public function fetch_all_rows($arr=''){
+		$tmp2=array();
 		while($tmp=$this->nfr($arr)){
 			$tmp2[]=$tmp;
 		}
@@ -65,6 +66,7 @@ class Mysql{
 	}
 
 	public function fetch_all_arrays($arr=''){
+		$tmp2=array();
 		while($tmp=$this->nfa($arr='')){
 			$tmp2[]=$tmp;
 		}
@@ -72,6 +74,7 @@ class Mysql{
 	}
 
 	public function fetch_all_objects($arr=''){
+		$tmp2=array();
 		while($tmp=$this->nfo($arr='')){
 			$tmp2[]=$tmp;
 		}
