@@ -1,10 +1,10 @@
 <?
 namespace DB;
 class Mysql{
-	var $Database = "";
-	var $Host = "";
-	var $User = "";
-	var $Password = "";
+	var $Database = $_ENV['mysql_database'];
+	var $Host = $_ENV['mysql_host'];
+	var $User = $_ENV['mysql_user'];
+	var $Password = $_ENV['mysql_password'];
 
 	var $Link_ID = 0;
 	var $Query_ID = 0;
