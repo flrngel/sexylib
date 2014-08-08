@@ -1,10 +1,10 @@
 <?
 namespace DB;
 class Mysql{
-	var $Database = $_ENV['mysql_database'];
-	var $Host = $_ENV['mysql_host'];
-	var $User = $_ENV['mysql_user'];
-	var $Password = $_ENV['mysql_password'];
+	var $Database;
+	var $Host;
+	var $User;
+	var $Password;
 
 	var $Link_ID = 0;
 	var $Query_ID = 0;
@@ -18,6 +18,10 @@ class Mysql{
 
 	function __construct( $debug_addr = '' ){
 		$this->debug_addr = $debug_addr;
+		$this->Database = $_ENV['mysql_database'];
+		$this->Host = $_ENV['mysql_host'];
+		$this->User = $_ENV['mysql_user'];
+		$this->Password = $_ENV['mysql_password'];
 	}
 
 	private function connect() {
