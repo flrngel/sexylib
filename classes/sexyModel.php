@@ -14,7 +14,7 @@ class sexyModel{
 		foreach( $PERMISSION as $KEY ){
 			if( !empty($ARRAY[$KEY]) || isset($ARRAY[$KEY]) ){
 				$COLUMNS[]="`$KEY`";
-				$VALUES[]="'".mysql_escape_string($ARRAY[$KEY])."'";
+				$VALUES[]="'".$this->db->escape_string($ARRAY[$KEY])."'";
 			}
 		}
 		$COLUMNS=implode(",",$COLUMNS);
@@ -32,9 +32,9 @@ class sexyModel{
 				if( count($EXP) == 2 && strlen($EXP[0]) == 1 ){
 					// this means operator
 					// usage: array('KEY' => "OP;VAL")         OP : +, -, etc..
-					$VALUES[]="`$KEY`=`$KEY`$EXP[0]'".mysql_escape_string($EXP[1])."'";
+					$VALUES[]="`$KEY`=`$KEY`$EXP[0]'".$this->db->escape_string($EXP[1])."'";
 				}else{
-					$VALUES[]="`$KEY`='".mysql_escape_string($ARRAY[$KEY])."'";
+					$VALUES[]="`$KEY`='".$this->db->escape_string($ARRAY[$KEY])."'";
 				}
 			}
 		}
@@ -46,7 +46,7 @@ class sexyModel{
 	function _delete($VALIDATE,$ARRAY){
 		$VALUES=array();
 		foreach( $VALIDATE as $KEY ){
-			$VALUES[]="`$KEY`='".mysql_escape_string($ARRAY[$KEY])."'";
+			$VALUES[]="`$KEY`='".$this->db->escape_string($ARRAY[$KEY])."'";
 		}
 		$WHERE=implode(" and ",$VALUES);
 		$QUERY="delete from `$this->TABLE` where 1 and $WHERE";
